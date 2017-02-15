@@ -21,7 +21,8 @@ class Reading
     end.join(',')
   end
 
-  def self.for_today(days_remaining:, verses_remaining:, starting_verse:)
+  def self.for_today(end_date:, verses_remaining:, starting_verse:)
+    days_remaining = (end_date - Date.today).to_i
     target_length = verses_remaining / days_remaining
 
     ref = Reference.parse(starting_verse)
