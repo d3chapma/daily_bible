@@ -1,0 +1,6 @@
+<% @readings.each do |reading| %>
+  <h2><%= reading['display'] %></h2>
+  <%=raw reading['text'] %>
+<% end %>
+
+<%= link_to 'Mark as Read', completed_readings_url(id: @plan.id, completed: @passages) %>

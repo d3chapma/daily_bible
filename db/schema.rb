@@ -10,14 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170212172828) do
+ActiveRecord::Schema.define(version: 20170216032118) do
+
+  create_table "completed_readings", force: :cascade do |t|
+    t.integer  "plan_id"
+    t.text     "passages"
+    t.integer  "verse_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["plan_id"], name: "index_completed_readings_on_plan_id"
+  end
 
   create_table "plans", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "books"
     t.date     "finish_by"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.text     "completed_readings"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 

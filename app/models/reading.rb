@@ -21,12 +21,8 @@ class Reading
     end.join(',')
   end
 
-  def self.for_today(end_date:, verses_remaining:, starting_verse:)
-    days_remaining = (end_date - Date.today).to_i
-    target_length = verses_remaining / days_remaining
-
-    ref = Reference.parse(starting_verse)
-    current_chunk = ref.chunk
+  def self.for_today(target_length:, books:, next_chunk:)
+    current_chunk = next_chunk
 
     options = [new(current_chunk)]
     i = 0
@@ -38,6 +34,6 @@ class Reading
       break if new_reading.verse_count >= (target_length + 30)
     end
 
-    options.min_by { |o| (o.verse_count - target_length).abs }
+    passages = options.min_by { |o| (o.verse_count - target_length).abs }
   end
 end

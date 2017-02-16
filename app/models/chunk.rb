@@ -34,4 +34,8 @@ class Chunk
     _, last = @verses.scan(/\d+/)
     last.to_i
   end
+
+  def self.parse(books, passage)
+
+  end
 end
