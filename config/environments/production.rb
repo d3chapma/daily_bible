@@ -60,12 +60,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['SPARKPOST_SMTP_HOST'],
-    port:                 ENV['SPARKPOST_SMTP_PORT'],
-    domain:               ENV['SPARKPOST_SMTP_HOST'],
-    user_name:            ENV['SPARKPOST_SMTP_USERNAME'],
-    password:             ENV['SPARKPOST_SMTP_PASSWORD'],
-    authentication:       'plain',
+    address:              'smtp.gmail.com',
+    port:                 465,
+    user_name:            ENV['GMAIL_USERNAME'],
+    password:             ENV['GMAIL_PASSWORD'],
+    authentication:       :login,
     enable_starttls_auto: true  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
