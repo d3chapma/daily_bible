@@ -35,7 +35,11 @@ class Plan < ApplicationRecord
   end
 
   def next_chunk
-    _, book_name, chapter, verse = last_reading.last_passage.match(/(.+)\+(\d+):\d+\-(\d+)/).to_a
+    if last_reading
+      _, book_name, chapter, verse = last_reading.last_passage.match(/(.+)\+(\d+):\d+\-(\d+)/).to_a
+    else
+      book_name, chapter, verse = [books.first.name, 1, 1]
+    end
     book = find_book(book_name)
     chunk = book.find_chunk(chapter.to_i, verse.to_i)
 

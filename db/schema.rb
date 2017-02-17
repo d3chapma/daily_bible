@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20170216032118) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "completed_readings", force: :cascade do |t|
     t.integer  "plan_id"
     t.text     "passages"
     t.integer  "verse_count"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["plan_id"], name: "index_completed_readings_on_plan_id"
+    t.index ["plan_id"], name: "index_completed_readings_on_plan_id", using: :btree
   end
 
   create_table "plans", force: :cascade do |t|
@@ -28,7 +31,7 @@ ActiveRecord::Schema.define(version: 20170216032118) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.text     "completed_readings"
-    t.index ["user_id"], name: "index_plans_on_user_id"
+    t.index ["user_id"], name: "index_plans_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
