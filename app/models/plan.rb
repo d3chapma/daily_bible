@@ -3,9 +3,22 @@ class Plan < ApplicationRecord
   serialize :completed_readings, Array
 
   has_many :completed_readings
+  belongs_to :user
 
   def todays_reading
     Reading.for_today(target_length: target_length, books: books, next_chunk: next_chunk)
+  end
+
+  def reading_streak
+    CompletedReading.plan_reading_streak(self)
+  end
+
+  def percentage_complete
+    verses_read * 100 / total_verses
+  end
+
+  def days_remaining
+    (finish_by - Date.today).to_i
   end
 
   private
@@ -28,10 +41,6 @@ class Plan < ApplicationRecord
 
   def target_length
     verses_remaining / days_remaining
-  end
-
-  def days_remaining
-    (finish_by - Date.today).to_i
   end
 
   def next_chunk
