@@ -20,6 +20,10 @@ class Plan < ApplicationRecord
   def days_remaining
     (finish_by - Date.today).to_i
   end
+  
+  def next_book(book)
+    books[books.index(book) + 1]
+  end
 
   private
 
@@ -53,10 +57,6 @@ class Plan < ApplicationRecord
     chunk = book.find_chunk(chapter.to_i, verse.to_i)
 
     chunk.next
-  end
-
-  def next_book(book)
-    books[books.index(book) + 1]
   end
 
   def find_book(book_name)
