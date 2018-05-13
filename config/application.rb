@@ -12,8 +12,9 @@ module DailyBible
     config.load_defaults 5.1
 
     # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
 
     ENV['BIBLE_AUTH'] = 'p4TJTUZ771fzdrjfeE0MVLh3xicPf7Om7qWJj3Yc'
   end
