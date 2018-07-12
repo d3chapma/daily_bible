@@ -1,8 +1,8 @@
 class ReadingMailer < ApplicationMailer
-  def todays_reading(plan, readings, passages)
+  def send_reading(plan)
     @plan = plan
-    @readings = readings
-    @passages = passages
+
+    @reading = @plan.current_reading
 
     mail(to: 'talk2dc@gmail.com')
   end

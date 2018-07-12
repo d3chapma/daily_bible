@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_12_025211) do
+ActiveRecord::Schema.define(version: 2018_07_12_035706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "completed_readings", id: :serial, force: :cascade do |t|
-    t.integer "plan_id"
-    t.text "passages"
-    t.integer "verse_count"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["plan_id"], name: "index_completed_readings_on_plan_id"
-  end
 
   create_table "plans", force: :cascade do |t|
     t.bigint "user_id"
@@ -31,6 +22,18 @@ ActiveRecord::Schema.define(version: 2018_07_12_025211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+  create_table "readings", force: :cascade do |t|
+    t.bigint "plan_id"
+    t.string "book_name"
+    t.integer "chapter"
+    t.datetime "completed_at"
+    t.datetime "first_sent_at"
+    t.datetime "last_sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_readings_on_plan_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

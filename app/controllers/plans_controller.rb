@@ -10,6 +10,9 @@ class PlansController < ApplicationController
   def create
     if active_plan.nil?
       @new_plan = Plan.create(book_name: book_name, user: current_user)
+      @new_plan.start_reading
+
+      ReadingMailer.send_reading(@new_plan).deliver
     end
   end
 
@@ -39,6 +42,6 @@ class PlansController < ApplicationController
   end
 
   def active_plan
-    @active_plan ||= Plan.find_by(user: current_user, completed_at: nil)
+    @active_plan ||= Plan.active_for(current_user)
   end
 end
