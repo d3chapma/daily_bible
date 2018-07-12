@@ -10,32 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216032118) do
+ActiveRecord::Schema.define(version: 2018_07_12_025211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "completed_readings", force: :cascade do |t|
-    t.integer  "plan_id"
-    t.text     "passages"
-    t.integer  "verse_count"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["plan_id"], name: "index_completed_readings_on_plan_id", using: :btree
+  create_table "completed_readings", id: :serial, force: :cascade do |t|
+    t.integer "plan_id"
+    t.text "passages"
+    t.integer "verse_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_completed_readings_on_plan_id"
   end
 
   create_table "plans", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "books"
-    t.date     "finish_by"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.text     "completed_readings"
-    t.index ["user_id"], name: "index_plans_on_user_id", using: :btree
+    t.bigint "user_id"
+    t.string "book_name", null: false
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "email"
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

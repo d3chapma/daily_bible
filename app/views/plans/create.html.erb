@@ -1,0 +1,5 @@
+<% if @active_plan %>
+  You are already reading <%= @active_plan.book_name %>.
+<% else %>
+  We just sent you an email with your first reading from <%= @new_plan.book_name %>
+<% end %>
