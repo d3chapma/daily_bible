@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root to: 'session#new'
 
-  resources :plans, only: [:new, :create]
+  resources :plans, except: [:index, :edit, :update]
 end

@@ -1,8 +1,12 @@
 class Plan < ApplicationRecord
   belongs_to :user
 
-  def next_reading
+  def active?
+    completed_at.nil?
+  end
 
+  def mark_complete
+    update!(completed_at: DateTime.now)
   end
 
   private

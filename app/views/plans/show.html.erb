@@ -1,0 +1,5 @@
+<p>You are currently reading <%= @active_plan.book_name %>.</p>
+
+<p>Would like to mark this reading as complete and choose a new book?</p>
+
+<p><%= link_to "Choose a New Book", plan_path(@active_plan), method: :delete %></p>
