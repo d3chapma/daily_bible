@@ -1,0 +1,19 @@
+<p>
+  You have completed reading chapter <%= @reading.chapter %> of
+  <%= @reading.book_name %>.
+</p>
+
+<% if @plan.completed? %>
+  <p>
+    You are now done reading <%= @plan.book_name %>. Please choose another
+    book to read.
+  </p>
+
+  <p>
+    <%= link_to  %>
+  </p>
+<% else %>
+  <p>
+    We have send you the next chapter to read when you are ready.
+  </p>
+<% end %>

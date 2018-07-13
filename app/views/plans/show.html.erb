@@ -1,5 +1,13 @@
-<p>You are currently reading <%= @active_plan.book_name %>.</p>
+<% if @plan.completed? %>
+  <p>You have already completed reading <%= @plan.book_name %>.</p>
 
-<p>Would like to mark this reading as complete and choose a new book?</p>
+  <p><%= link_to "Choose a New Book", new_plan_path %></p>
+<% else %>
+  <p>You are currently reading <%= @plan.book_name %>.</p>
 
-<p><%= link_to "Choose a New Book", plan_path(@active_plan), method: :delete %></p>
+  <p>Would like to mark this reading as complete and choose a new book?</p>
+
+  <p><%= link_to "Choose a New Book", plan_path(@active_plan), method: :delete %></p>
+
+  <p><%= link_to "Resend Latest Reading", email_plan_path(@active_plan) %></p>
+<% end %>

@@ -1,6 +1,8 @@
 <h2><%= @reading.title %></h2>
 <%=raw @reading.text %>
 
+<%= link_to "Mark as Complete", complete_reading_url(@reading) %>
+
 <hr>
 
 <%=raw  @reading.copyright %>

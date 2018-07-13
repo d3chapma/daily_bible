@@ -17,6 +17,7 @@ class PlansController < ApplicationController
   end
 
   def show
+    @plan = Plan.find(plan_id)
   end
 
   def destroy
@@ -25,6 +26,12 @@ class PlansController < ApplicationController
     @plan.mark_complete if @plan.active?
 
     redirect_to new_plan_path
+  end
+
+  def email
+    @plan = Plan.find(plan_id)
+
+    ReadingMailer.send_reading(@plan).deliver
   end
 
   private

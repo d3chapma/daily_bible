@@ -1,18 +1,18 @@
 class ReadingsController < ApplicationController
-  def update
-    @plan = Plan.find(params.require(:id))
+  def complete
+    @reading = Reading.find(reading_id)
 
-    @plan.completed_readings.create(passages: completed, verse_count: verse_count)
+    @plan = @reading.plan
+
+    @plan.complete_reading
+
+    ReadingMailer.send_reading(@plan).deliver unless @plan.completed?
   end
 
   private
 
-  def verse_count
-    match, first, second = completed.match(/:(\d+)\-(\d+)/).to_a
-    second.to_i - first.to_i + 1
+  def reading_id
+    params.require(:id)
   end
 
-  def completed
-    params.require(:completed)
-  end
 end

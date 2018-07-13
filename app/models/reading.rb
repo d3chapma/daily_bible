@@ -19,6 +19,10 @@ class Reading < ApplicationRecord
     passage["search"]["result"]["passages"]["passage"]["copyright"]
   end
 
+  def mark_complete
+    update!(completed_at: DateTime.now)
+  end
+
   private
 
   def fetch_passage
