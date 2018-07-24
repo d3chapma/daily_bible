@@ -1,8 +1,3 @@
-<p>
-  You have completed reading chapter <%= @reading.chapter %> of
-  <%= @reading.book_name %>.
-</p>
-
 <% if @plan.completed? %>
   <p>
     You are now done reading <%= @plan.book_name %>. Please choose another
@@ -14,6 +9,9 @@
   </p>
 <% else %>
   <p>
-    We have send you the next chapter to read when you are ready.
+    You have already completed reading chapter <%= @reading.chapter %> of
+    <%= @reading.book_name %>.
   </p>
+
+  <p><%= link_to "Resend the next reading", email_plan_path(@plan) %></p>
 <% end %>

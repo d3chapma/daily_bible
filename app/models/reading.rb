@@ -23,6 +23,14 @@ class Reading < ApplicationRecord
     update!(completed_at: DateTime.now)
   end
 
+  def book
+    Book.get(book_name)
+  end
+
+  def completed?
+    completed_at.present?
+  end
+
   private
 
   def fetch_passage

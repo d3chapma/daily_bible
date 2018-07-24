@@ -24,13 +24,13 @@ class Plan < ApplicationRecord
     readings.find_by(completed_at: nil)
   end
 
-  def complete_reading
-    return if completed?
+  def complete_reading(reading)
+    return if completed? || reading.completed?
 
-    chapter = current_reading.chapter
-    book = Book.get(book_name)
+    chapter = reading.chapter
+    book = reading.book
 
-    current_reading.mark_complete
+    reading.mark_complete
 
     if chapter >= book.chapters
       mark_complete

@@ -1,12 +1,15 @@
 class ReadingsController < ApplicationController
   def complete
     @reading = Reading.find(reading_id)
-
     @plan = @reading.plan
 
-    @plan.complete_reading
+    if @reading.completed?
+      render :already_completed
+    else
+      @plan.complete_reading(@reading)
 
-    ReadingMailer.send_reading(@plan).deliver unless @plan.completed?
+      ReadingMailer.send_reading(@plan).deliver unless @plan.completed?
+    end
   end
 
   private
