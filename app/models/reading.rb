@@ -31,6 +31,18 @@ class Reading < ApplicationRecord
     completed_at.present?
   end
 
+  def mark_as_sent
+    now = DateTime.now
+    attrs = { last_sent_at: now }
+    attrs.merge!({ first_sent_at: now }) unless sent?
+
+    update(attrs)
+  end
+
+  def sent?
+    last_sent_at.present?
+  end
+
   private
 
   def fetch_passage

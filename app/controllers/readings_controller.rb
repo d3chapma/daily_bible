@@ -9,6 +9,7 @@ class ReadingsController < ApplicationController
       @plan.complete_reading(@reading)
 
       ReadingMailer.send_reading(@plan).deliver unless @plan.completed?
+      @reading.mark_as_sent
     end
   end
 
